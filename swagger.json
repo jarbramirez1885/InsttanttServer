@@ -1,0 +1,169 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "My User API CRUD",
+      "description": "My User Project Application API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:4000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Users",
+        "description": "API for users in the system"
+      }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+
+    "paths": {
+        "/api/users": {
+          "get": {
+            "tags": ["Users"],
+            "summary": "Get all users in system",
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/definitions/Users"
+                }
+              }
+            }
+          }
+        },
+        "api/users": {
+            "post": {
+              "tags": ["Users"],
+              "summary": "Create new user in system",
+              "description": "Create new user in system",
+              "parameters": [
+                {
+                  "name": "user",
+                  "in": "body",
+                  "description": "User that we want to create",
+                  "schema": {
+                    "$ref": "#/definitions/User"
+                  }
+                }
+              ],
+              "produces": ["application/json"],
+              "responses": {
+                "200": {
+                  "description": "New user is created",
+                  "schema": {
+                    "$ref": "#/definitions/User"
+                  }
+                }
+              }
+            }
+          },
+        
+          "api/users/{id}": {
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID of user that we want to find",
+                "type": "integer"
+              }
+            ],
+            "put": {
+              "summary": "Update user with give ID",
+              "tags": ["Users"],
+              "parameters": [
+                {
+                  "name": "user",
+                  "in": "body",
+                  "description": "User with new values of properties",
+                  "schema": {
+                    "$ref": "#/definitions/updateUser"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "User is updated",
+                  "schema": {
+                    "$ref": "#/definitions/User"
+                  }
+                }
+              }
+            }
+          }
+      },
+      "definitions": {
+        "User": {
+          "required": ["email", "_id", "phonenumber", "firstname", "lastname", "documenttype","documentnumber","birthdate","expeditiondate"],
+          "properties": {
+            "_id": {
+              "type": "integer",
+              "uniqueItems": true
+            },
+            "phonenumber": {
+              "type": "integer"
+            },
+            "email": {
+              "type": "string"
+            },
+            "firstname": {
+                "type": "string"
+            },
+            "lastname": {
+                "type": "string"
+            },
+            "documenttype": {
+                "type": "integer"
+              },
+              "documentnumber": {
+                "type": "integer"
+              },
+              "birthdate": {
+                  "type": "string"
+              },
+              "expeditiondate": {
+                  "type": "string"
+              }
+          }
+        },
+        "Users": {
+          "type": "array",
+          "$ref": "#/definitions/User"
+        },
+        "updateUser": {
+            "required": ["email", "_id", "phonenumber", "firstname", "lastname", "documenttype","documentnumber","birthdate","expeditiondate"],
+            "properties": {
+                "phonenumber": {
+                    "type": "integer"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "firstname": {
+                      "type": "string"
+                  },
+                  "lastname": {
+                      "type": "string"
+                  },
+                  "documenttype": {
+                      "type": "integer"
+                    },
+                    "documentnumber": {
+                      "type": "integer"
+                    },
+                    "birthdate": {
+                        "type": "string"
+                    },
+                    "expeditiondate": {
+                        "type": "string"
+                    }
+            }
+          }
+        
+      }
+  }
